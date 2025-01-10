@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +50,30 @@ public class PacienteController {
         }
 
         return ResponseEntity.ok(p);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente paciente){
+        Optional<Paciente> pacienteTemp = pacienteService.obtenerPorId(id);
+        if (pacienteTemp.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("No se encontro ningun Paciente con ese ID"));
+        }
+
+        Paciente p = pacienteService.actualizar(id, paciente);
+
+        return ResponseEntity.ok(p);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> eliminarPaciente(@PathVariable Long id){
+        Optional<Paciente> pacienteTemp = pacienteService.obtenerPorId(id);
+        if (pacienteTemp.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("No se encontro ningun Paciente con ese ID"));
+        }
+
+        pacienteService.eliminar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     static class ErrorResponse {
