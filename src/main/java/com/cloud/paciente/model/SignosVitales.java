@@ -2,6 +2,8 @@ package com.cloud.paciente.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class SignosVitales {
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
+    @JsonBackReference
     private Paciente paciente;
 
     public Long getId() {

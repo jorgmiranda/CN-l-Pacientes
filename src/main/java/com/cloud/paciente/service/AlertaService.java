@@ -9,4 +9,6 @@ public interface AlertaService {
     Alerta evaluarCriticidad(SignosVitales signosVitales);
     Alerta guardarAlerta(Alerta alerta);
     List<Alerta> obtenerAlertasNoAtendidas();
+    List<Alerta> obtenerAlertasByPacienteID(Long pacienteID);
+    Alerta marcarAlertaComoAtendida(Long alertaId);
 }

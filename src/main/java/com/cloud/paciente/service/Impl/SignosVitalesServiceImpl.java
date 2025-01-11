@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cloud.paciente.model.Alerta;
+import com.cloud.paciente.model.Paciente;
 import com.cloud.paciente.model.SignosVitales;
 import com.cloud.paciente.repository.SignosVitalesRepository;
 import com.cloud.paciente.service.AlertaService;
+import com.cloud.paciente.service.PacienteService;
 import com.cloud.paciente.service.SignosVitalesService;
 
 @Service
@@ -19,6 +21,9 @@ public class SignosVitalesServiceImpl implements SignosVitalesService{
 
     @Autowired
     private AlertaService alertaService;
+
+    @Autowired
+    private PacienteService pacienteService;
 
     @Override
     public SignosVitales registrarSignosVitales(SignosVitales signosVitales) {

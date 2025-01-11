@@ -2,6 +2,7 @@ package com.cloud.paciente.service.Impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,24 @@ public class AlertaServiceImpl implements AlertaService{
         return alertaRepository.findByAtendidaFalse();
     }
 
-    
+    @Override
+    public List<Alerta> obtenerAlertasByPacienteID(Long pacienteID){
+        return alertaRepository.findByPacienteId(pacienteID);
+    }
+
+    @Override
+    public Alerta marcarAlertaComoAtendida(Long alertaId) {
+        // Buscar la alerta por ID
+        Optional<Alerta> alertaOptional = alertaRepository.findById(alertaId);
+        if (alertaOptional.isEmpty()) {
+            return null;
+        }
+
+        // Marcar como atendida
+        Alerta alerta = alertaOptional.get();
+        alerta.setAtendida(true);
+
+        // Guardar la alerta actualizada
+        return alertaRepository.save(alerta);
+    }
 }

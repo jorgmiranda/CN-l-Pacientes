@@ -8,4 +8,5 @@ import com.cloud.paciente.model.Alerta;
 
 public interface AlertaRepository extends JpaRepository<Alerta, Long> {
     List<Alerta> findByAtendidaFalse();
+    List<Alerta> findByPacienteId(Long pacienteId);
 }
