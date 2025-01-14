@@ -21,7 +21,6 @@ import com.cloud.paciente.service.PacienteService;
 import com.cloud.paciente.service.SignosVitalesService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/signos-vitales")
 public class SignosVitalesController {
     

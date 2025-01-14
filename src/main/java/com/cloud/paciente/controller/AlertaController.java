@@ -14,7 +14,6 @@ import com.cloud.paciente.model.Alerta;
 import com.cloud.paciente.service.AlertaService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/alertas")
 public class AlertaController {
 

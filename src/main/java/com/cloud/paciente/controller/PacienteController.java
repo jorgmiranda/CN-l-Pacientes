@@ -20,7 +20,6 @@ import com.cloud.paciente.model.Paciente;
 import com.cloud.paciente.service.PacienteService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/pacientes")
 public class PacienteController {
     
