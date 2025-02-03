@@ -6,7 +6,7 @@ import com.cloud.paciente.model.Alerta;
 import com.cloud.paciente.model.SignosVitales;
 
 public interface AlertaService {
-    Alerta evaluarCriticidad(SignosVitales signosVitales);
+    List<Alerta> evaluarCriticidad(SignosVitales signosVitales);
     Alerta guardarAlerta(Alerta alerta);
     List<Alerta> obtenerAlertasNoAtendidas();
     List<Alerta> obtenerAlertasByPacienteID(Long pacienteID);
