@@ -20,7 +20,7 @@ public class Alerta {
     private String tipo; // Tipo de alerta (e.g., "frecuencia cardiaca crítica", "hipotermia")
     private LocalDateTime fechaGeneracion; // Fecha y hora en que se generó la alerta
     private Boolean atendida; // Indica si la alerta ha sido gestionada
-
+    private String severidad; //Severidad de la alerta (Leve, Moderado, Crítico)
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
@@ -84,6 +84,14 @@ public class Alerta {
     public void setSignosVitales(SignosVitales signosVitales) {
         this.signosVitales = signosVitales;
     } 
+
+    public String getSeveridad() {
+        return severidad;
+    }
+
+    public void setSeveridad(String severidad) {
+        this.severidad = severidad;
+    }
 
     @PrePersist
     public void prePersist() {
