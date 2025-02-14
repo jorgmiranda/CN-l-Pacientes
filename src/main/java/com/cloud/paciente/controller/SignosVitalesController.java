@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cloud.paciente.dto.SignosVitalesRequestDTO;
+import com.cloud.paciente.dto.SignosVitalesResponseDTO;
 import com.cloud.paciente.model.Paciente;
 import com.cloud.paciente.model.SignosVitales;
 import com.cloud.paciente.service.PacienteService;
@@ -22,7 +23,7 @@ import com.cloud.paciente.service.SignosVitalesService;
 @RestController
 @RequestMapping("/api/signos-vitales")
 public class SignosVitalesController {
-    
+
     @Autowired
     private SignosVitalesService signosVitalesService;
 
@@ -35,8 +36,8 @@ public class SignosVitalesController {
         Optional<Paciente> pacienteOptional = pacienteService.obtenerPorId(request.getPacienteId());
         if (pacienteOptional.isEmpty()) {
             return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body("Paciente no encontrado con ID: " + request.getPacienteId());
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Paciente no encontrado con ID: " + request.getPacienteId());
         }
 
         // Crear la entidad SignosVitales con los datos del DTO
@@ -52,12 +53,18 @@ public class SignosVitalesController {
         // Registrar los signos vitales
         SignosVitales guardado = signosVitalesService.registrarSignosVitales(signosVitales);
 
+        // Retornar objeto Signos Vitales con el id paciente
+        SignosVitalesResponseDTO s = new SignosVitalesResponseDTO(guardado.getId(), guardado.getPaciente().getId(),
+                guardado.getFrecuenciaCardiaca(), guardado.getFrecuenciaRespiratoria(), guardado.getPresionSistolica(),
+                guardado.getPresionDiastolica(), guardado.getTemperatura(), guardado.getSaturacionOxigeno(),
+                guardado.getFechaRegistro());
+
         // Devolver la respuesta con los signos vitales registrados
-        return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(s);
     }
 
     @GetMapping("/paciente/{id}")
-    public List<SignosVitales> obtenerSignosVitalesPaciente(@PathVariable Long id){
+    public List<SignosVitales> obtenerSignosVitalesPaciente(@PathVariable Long id) {
         return signosVitalesService.obtenerSignosVitalesDePaciente(id);
     }
 }

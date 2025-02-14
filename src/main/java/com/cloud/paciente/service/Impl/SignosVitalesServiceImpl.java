@@ -37,12 +37,12 @@ public class SignosVitalesServiceImpl implements SignosVitalesService{
         SignosVitales guardado = signosVitalesRepository.save(signosVitales);
 
         // Evaluar criticidad y generar múltiples alertas si es necesario
-        List<Alerta> alertas = alertaService.evaluarCriticidad(guardado);
-        if (alertas != null && !alertas.isEmpty()) {
-            for (Alerta alerta : alertas) {
-                enviarAlertaAlProductor(alerta);
-            }
-        }
+        // List<Alerta> alertas = alertaService.evaluarCriticidad(guardado);
+        // if (alertas != null && !alertas.isEmpty()) {
+        //     for (Alerta alerta : alertas) {
+        //         enviarAlertaAlProductor(alerta);
+        //     }
+        // }
 
         return guardado;
     }
