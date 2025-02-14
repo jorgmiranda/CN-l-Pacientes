@@ -21,6 +21,7 @@ public class Alerta {
     private LocalDateTime fechaGeneracion; // Fecha y hora en que se generó la alerta
     private Boolean atendida; // Indica si la alerta ha sido gestionada
     private String severidad; //Severidad de la alerta (Leve, Moderado, Crítico)
+    private String source; //Identifica si la fuente fue rabbitMQ o Kafka
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
@@ -98,6 +99,14 @@ public class Alerta {
         if (fechaGeneracion == null) {
             fechaGeneracion = LocalDateTime.now();
         }
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
 }
